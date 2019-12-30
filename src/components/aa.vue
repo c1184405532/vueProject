@@ -13,7 +13,7 @@
                 <div class="logo">
                     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569560850923&di=619fe812d5588688d62502ec908723fc&imgtype=0&src=http%3A%2F%2Fpic26.nipic.com%2F20121221%2F11208021_174304838000_2.jpg" alt="">
                 </div>
-                <div class="center">标题</div>
+                <div class="center">标题2</div>
                 <div class="right_group">
                     <div class="minimize">-</div>
                     <div class="enlarge">[]</div>
