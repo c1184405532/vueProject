@@ -1,28 +1,14 @@
 
-import IndexHome from '../pages/LayUi.vue';
-import Vant from '../pages/vant.vue';
-import Videos from '../pages/Videos.vue';
-import Gantt from '../pages/Gantt.vue';
+import Login from '../pages/user/Login.vue';
 export default [
     {
         path:'/',
-        redirect:'/vant',
-        name:'IndexHome',
-        component:IndexHome
+        name:'/',
+        redirect: '/user/login',
     },
     {
-        path:'/vant',
-        name:'Vant',
-        component:Vant
-    },
-    {
-        path:'/gantt',
-        name:'Gantt',
-        component:Gantt
-    },
-    {
-        path:'/video',
-        name:'Videos',
-        component:Videos
-    }
+        path:'/user/login',
+        name:'user/login',
+        component:Login
+    },   
 ]

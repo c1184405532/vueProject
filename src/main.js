@@ -3,6 +3,9 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import router from './router/index'
 import { Button,Modal,Dropdown ,Menu,Icon} from 'ant-design-vue';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+import './globaleStyle/globale.less'
 import Vconsole from 'vconsole'
 let newvConsole = new Vconsole()
 
@@ -18,6 +21,7 @@ Vue.use( Dropdown)
 Vue.use( Menu)
 console.dir(Menu)
 Vue.use(Icon)
+Vue.use(Antd)
 //import 'lib-flexible/flexible'
 //import './utils'
 Vue.config.productionTip = false;

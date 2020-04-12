@@ -12,6 +12,29 @@ let getUrlParams = ()=>{
     }
     return obj;
 }
+let quickSort = (list)=> {
+    if (list.length < 2) { // 基线条件，当元素为空或一个时直接返回
+        return list;
+    } else {
+        const pivot = list[0];
+        let less = [];     // 对数据进行分区，所有小于 pivot 的放在 less 里面
+        let greater = [];  // 所有大于 pivot 的放在 greater 里面
+
+        for (let i = 1; i < list.length; i++) {
+            const item = list[i];
+            if (item <= pivot) {
+                less.push(item);
+            } else if (item > pivot) {
+                greater.push(item);
+            }
+        }
+        console.log(pivot)
+        // 递归调用
+        // 对两边分区再次分解
+        return quickSort(less).concat(pivot, quickSort(greater));
+    }
+},
 export {
-    getUrlParams
+    getUrlParams,
+    quickSort
 }
