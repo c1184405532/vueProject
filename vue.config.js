@@ -18,11 +18,11 @@ const px2rem = require('postcss-px2rem')
 
 // 配置基本大小
 const postcss = px2rem({
-  // 基准大小 baseSize，需要和rem.js中相同
-  remUnit: 192, custom: {70: ['index']}
+	// 基准大小 baseSize，需要和rem.js中相同
+	remUnit: 192, custom: { 70: ['index'] }
 })
 
-// 使用等比适配插件
+//使用等比适配插件
 // module.exports = {
 //     css: {
 //         loaderOptions: {
@@ -35,7 +35,7 @@ const postcss = px2rem({
 //       },
 //     chainWebpack: config => {
 //         config.module
-//         .rule('sass')
+//         .rule('less')
 //         .oneOf('vue')
 //         .use('px2rem-loader')
 //         .loader('px2rem-loader')
@@ -44,3 +44,32 @@ const postcss = px2rem({
 //         .end()
 //     }
 //   }
+module.exports = {
+	css: {
+		loaderOptions: {
+			postcss: {
+				plugins: [
+					require('postcss-pxtorem')({ // 把px单位换算成rem单位
+						rootValue: 37.5, // 换算的基数(设计图750的根字体为32)
+						selectorBlackList: ['weui', 'mu'], // 忽略转换正则匹配项
+						propList: ['*']
+					})
+				]
+			}
+		}
+	},
+	// chainWebpack: config => {
+	// 	config.module
+	// 		.rule('less')
+	// 		.oneOf('vue')
+	// 		.use('postcss-pxtorem')
+			
+	// 		.options({ // 把px单位换算成rem单位
+	// 				rootValue: 37.5, // 换算的基数(设计图750的根字体为32)
+	// 				selectorBlackList: ['weui', 'mu'], // 忽略转换正则匹配项
+	// 				propList: ['*']
+	// 			})
+	// 		.end()
+	// }
+}
+

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import index from "./router/home";
-import {getLogin} from './api/login.js';
+// import index from "./router/home";
+// import {getLogin} from './api/login.js';
 // getLogin({a:1}).then((data)=>{
 //      console.log('data',data)
 // })
