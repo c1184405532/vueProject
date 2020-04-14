@@ -60,7 +60,7 @@ export default {
     margin-top: 20px;
 }
 .divs{
-    width: 360px;
+    width: 375px;
     height: 200px;
     background: #aaa;
     font-size: 40px;
