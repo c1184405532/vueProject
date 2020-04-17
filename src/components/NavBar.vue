@@ -3,6 +3,7 @@
         <NavBar 
             :title="title" 
             rightText="按钮"
+            :fixed="fixed"
             @click-right="rightClick" 
             class="nav_bar_box"
         />
@@ -19,6 +20,10 @@ export default {
         title:{
             type:String,
             default:'导航栏'
+        },
+        fixed:{
+            type:Boolean,
+            default:false,
         }
     },
     data() {

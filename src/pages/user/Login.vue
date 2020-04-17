@@ -47,7 +47,7 @@ export default {
                 return;
             }
             this.$router.push({
-                name:'homePage/home',
+                name:'homePage/layout',
             })
             console.log({
                 account:this.userAccount,

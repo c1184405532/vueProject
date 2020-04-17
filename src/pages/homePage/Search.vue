@@ -1,6 +1,6 @@
 <template>
-    <div class="home_page">
-        首页首页
+    <div>
+        搜索搜索
     </div>
 </template>
 
@@ -36,9 +36,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .home_page{
-        height: 600PX;
-        background: #ddd;
-        width: 100%;
-    }
+
 </style>
