@@ -3,9 +3,10 @@
         <NavBar
             title="首页"
             :fixed="true"
+            :leftArrow="false"
         />
             <div class="ignore_page_content">
-                <router-view></router-view>
+                <router-view/>
             </div>
         <TabBar />
     </div>
@@ -24,7 +25,7 @@ export default {
     },
     data() {
         return {
-
+            transitionName:'',
         };
     },
     computed: {
@@ -37,7 +38,7 @@ export default {
 
     },
     watch: {
-
+        
     },
     methods: {
 
@@ -50,7 +51,7 @@ export default {
         height: 100%;
         width: 100%;
         padding-bottom: 50PX;
-        padding-top: 46PX;
+        
     }
     .ignore_page_content{
         width: 100%;

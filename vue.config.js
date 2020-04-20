@@ -1,5 +1,19 @@
 
+
+const TimeStamp = new Date().getTime();
+function resolve (dir) {
+	return path.join(__dirname, dir)
+}
 module.exports = {
+	configureWebpack:{
+		output:{
+			// filename: `js/[name].${TimeStamp}.js`,
+			// chunkFilename: `js/[name].${TimeStamp}.js`
+			filename: `js/[name].${TimeStamp}.js`,
+			chunkFilename: `js/[name].${TimeStamp}.js`
+			
+		},
+	},
 	css: {
 		loaderOptions: {
 			//rem转换

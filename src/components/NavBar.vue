@@ -3,10 +3,16 @@
         <NavBar 
             :title="title" 
             rightText="按钮"
+            :left-arrow="leftArrow"
+            :placeholder="true"
             :fixed="fixed"
             @click-right="rightClick" 
             class="nav_bar_box"
-        />
+            @click-left="leftClick"
+        >
+            <div slot="title">{{title}}</div>
+
+        </NavBar>
     </div>
 </template>
 
@@ -17,10 +23,17 @@ export default {
         NavBar
     },
     props: {
+        //中间标题
         title:{
             type:String,
             default:'导航栏'
         },
+        //是否显示左侧箭头
+        leftArrow:{
+            type:Boolean,
+            default:true,
+        },
+        //是否固定顶部 并保留位置
         fixed:{
             type:Boolean,
             default:false,
@@ -46,6 +59,12 @@ export default {
     methods: {
         rightClick(){
             console.log('点击')
+        },
+        leftClick(){
+            if(this.leftArrow){
+                 this.$router.go(-1)
+            }
+           
         },
     },
 };
