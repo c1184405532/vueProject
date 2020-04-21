@@ -26,8 +26,8 @@ export default {
 	props: {},
 	data() {
 		return {   
-            userAccount:'',  
-            userPassword:'',
+            userAccount:'123',  
+            userPassword:'456',
         }
 	},
 	computed: {},
@@ -47,7 +47,7 @@ export default {
                 return;
             }
             this.$router.push({
-                name:'homePage/layout',
+                name:'layout/home',
             })
             console.log({
                 account:this.userAccount,

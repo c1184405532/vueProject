@@ -1,16 +1,14 @@
 
 
-const TimeStamp = new Date().getTime();
-function resolve (dir) {
-	return path.join(__dirname, dir)
-}
+const timeStamp = new Date().getTime();
+
 module.exports = {
 	configureWebpack:{
 		output:{
-			// filename: `js/[name].${TimeStamp}.js`,
-			// chunkFilename: `js/[name].${TimeStamp}.js`
-			filename: `js/[name].${TimeStamp}.js`,
-			chunkFilename: `js/[name].${TimeStamp}.js`
+			// filename: `js/[name].${timeStamp}.js`,
+			// chunkFilename: `js/[name].${timeStamp}.js`
+			filename: `js/[name].${timeStamp}.js`,
+			chunkFilename: `js/[name].${timeStamp}.js`
 			
 		},
 	},

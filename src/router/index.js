@@ -1,6 +1,5 @@
 import VueRouter from "vue-router";
 import homerouter from "./home"
-import homesubpage from "./homesubpage"
 //防止重复跳转同一路由报警告
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -11,6 +10,5 @@ VueRouter.prototype.push = function push(location) {
 export default new VueRouter({
     routes: [
         ...homerouter,
-        ...homesubpage
     ]
 })
