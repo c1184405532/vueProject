@@ -1,13 +1,12 @@
 import axions from 'axios';
 import { Toast } from 'vant';
 //const basePort = 'http://192.168.8.24:8081';
-const basePort = 'http://192.168.8.97:8081';
-//const basePort = 'http://192.168.8.97:9000';
-//const baseURL = '/api';
+const baseURL = 'http://192.168.8.97:8081';
+
 const baseURL = '';
 const instance = axions.create({
-    //baseURL:'https://api.github.com/users',//basePort + baseURL,
-    baseURL:basePort + baseURL,
+    baseURL:'https://api.github.com/users',//basePort + baseURL,
+    //baseURL:baseURL,
     timeout:2000,
 
 })

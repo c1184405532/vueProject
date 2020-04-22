@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tabbar_layout">
         <Tabbar 
             v-model="tabActive"
             class="tab_bar_box"
@@ -56,8 +56,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .tab_bar_box{
-        //height: 100px;
+    .tabbar_layout{
+        height: 50PX;
         width: 100%;
     }
     // .van-nav-bar__title{

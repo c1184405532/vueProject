@@ -16,9 +16,6 @@ let newvConsole = new Vconsole()
 Vue.use(newvConsole)
 Vue.use(Vant);
 
-// import 'lib-flexible/flexible'
-// import './utils'
-import 'amfe-flexible';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter)

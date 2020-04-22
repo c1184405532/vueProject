@@ -50,7 +50,7 @@ export default {
     .layout_page_box{
         height: 100%;
         width: 100%;
-        padding-bottom: 50PX;
+        //padding-bottom: 50PX;
         
     }
     .ignore_page_content{

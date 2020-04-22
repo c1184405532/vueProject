@@ -1,6 +1,7 @@
 <template>
     <div class="home_page">
-        首页
+        <div class="">首页</div>
+        <Button @click="gotoPage()">查看详情</Button>
     </div>
 </template>
 
@@ -31,7 +32,11 @@ export default {
 
     },
     methods: {
-       
+       gotoPage(){
+           this.$router.push({
+                name:'home/detail',
+            })
+       },
     },
 };
 </script>
