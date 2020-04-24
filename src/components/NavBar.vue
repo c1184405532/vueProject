@@ -11,16 +11,19 @@
             @click-left="leftClick"
         >
             <div slot="title">{{title}}</div>
-
+            <div slot="right" class="nav_right_box">
+                <Icon :name="navRightIcon" size="18" />
+            </div>
         </NavBar>
     </div>
 </template>
 
 <script>
-import {NavBar } from 'vant';
+import {NavBar ,Icon} from 'vant';
 export default {
     components: {
-        NavBar
+        NavBar,
+        Icon
     },
     props: {
         //中间标题
@@ -38,11 +41,17 @@ export default {
             type:Boolean,
             default:true,
         },
+        //左侧点击回调
         backClick:{
             type:Function,
             default:function(){
 
             }
+        },
+        //右侧图标
+        navRightIcon:{
+            type:String,
+            default:''
         },
     },
     data() {
@@ -64,7 +73,11 @@ export default {
     },
     methods: {
         rightClick(){
-            console.log('点击')
+            vm.$emit('navBarRightClick',{
+                title:this.title,
+                navRightIcon:this.navRightIcon
+            })
+            //console.log('点击')
         },
         leftClick(){
             if(this.leftArrow){
@@ -83,6 +96,12 @@ export default {
     .nav_bar_box{
         //height: 100px;
         width: 100%;
+    }
+
+    .nav_right_box{
+        height: 100%;
+        display: flex;
+        align-items: center;
     }
     .van-nav-bar__title{
         color: #f00;

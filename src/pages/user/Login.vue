@@ -20,14 +20,15 @@
 </template>
 
 <script>
+import Axions from '@/request/Axios.js'
 export default {
 	components: {
     },
 	props: {},
 	data() {
 		return {   
-            userAccount:'123',  
-            userPassword:'456',
+            userAccount:'admin',  
+            userPassword:'123456',
         }
 	},
 	computed: {},
@@ -46,9 +47,16 @@ export default {
                 this.$toast('请输入用户密码')
                 return;
             }
-            this.$router.push({
-                name:'layout/home',
+            localStorage.setItem('tabBarActive',0)
+            Axions.post('api/login',{
+                userName:this.userAccount,
+                passWord:this.userPassword,
+            }).then((res)=>{
+                console.log(res)
             })
+            // this.$router.push({
+            //     name:'layout/home',
+            // })
             console.log({
                 account:this.userAccount,
                 password:this.userPassword

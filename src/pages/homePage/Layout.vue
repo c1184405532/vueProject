@@ -4,7 +4,9 @@
             :title="navBarTitle"
             :fixed="true"
             :leftArrow="false"
+            :navRightIcon="navRightIcon"
             v-show="isShowNavBar"
+            
         />
             <div class="ignore_page_content">
                 <router-view/>
@@ -31,10 +33,12 @@ export default {
         return {
             transitionName:'',
             tabbarData:[
-                {title:'首页',icon:'home-o',path:'layout/home',navBarType:true},
-                {title:'搜索',icon:'search',path:'layout/search',navBarType:false},
+                {title:'首页',icon:'home-o',navRightIcon:'search',path:'layout/home',navBarType:true},
+                {title:'搜索',icon:'search',navRightIcon:'home-o',path:'layout/search',navBarType:true},
+                {title:'我的',icon:'contact',navRightIcon:'search',path:'layout/my',navBarType:true},
             ],
             navBarTitle:'',
+            navRightIcon:'',
             isShowNavBar:true,
         };
     },
@@ -54,6 +58,7 @@ export default {
         tabbarCallback(tabbarData){
             console.log(tabbarData)
             this.navBarTitle = tabbarData.title
+            this.navRightIcon = tabbarData.navRightIcon
             this.isShowNavBar = tabbarData.navBarType
         },
     },

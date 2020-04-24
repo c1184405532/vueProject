@@ -1,12 +1,14 @@
 <template>
     <div class="home_page">
-        <div class="">首页</div>
-        <Button @click="gotoPage()">查看详情</Button>
+        
+        <div class="button_box">
+            <Button class="login_out" type="primary" @click="loginOut()">退出登录</Button>
+        </div>
     </div>
 </template>
 
 <script>
-import {Button} from 'vant'
+import { Button } from 'vant'
 export default {
     components: {
         Button
@@ -34,9 +36,9 @@ export default {
 
     },
     methods: {
-       gotoPage(){
+       loginOut(){
            this.$router.push({
-                name:'home/detail',
+                name:'user/login',
             })
        },
     },
@@ -44,9 +46,12 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .home_page{
-        height: 600PX;
-        background: #ddd;
+    .button_box{
         width: 100%;
+        text-align: center;
+    }
+    .login_out{
+        margin-top: 100px;
+
     }
 </style>

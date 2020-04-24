@@ -53,14 +53,30 @@ export default {
 
     },
     mounted() {
-        if(this.tabbarClick){
-            this.tabbarClick(this.tabbarData[this.tabActive])
+        //做判断的原因是 如果记录的值不同 会走两次tabbarClick 一次mounted 一次watch
+        //tab跳入详情页或其他路由页 返回时需要记录当前tabBarActive
+        if(localStorage.getItem('tabBarActive')){
+            //如果相同就不会触发watch监听 就要手动加载一次tabbarClick
+            if(this.tabActive === Number(localStorage.getItem('tabBarActive'))){
+                if(this.tabbarClick){
+                    this.tabbarClick(this.tabbarData[this.tabActive])
+                }
+            }
+            //赋值 如果值不同的话就会触发watch监听 进行tabbarClick调用
+            this.tabActive = Number(localStorage.getItem('tabBarActive'))          
+        }else{
+            if(this.tabbarClick){
+                this.tabbarClick(this.tabbarData[this.tabActive])
+            }
         }
+        localStorage.setItem('tabBarActive',this.tabActive)
+        
     },
     watch: {
         tabActive(newValue){
+            localStorage.setItem('tabBarActive',newValue)
             if(this.tabbarClick){
-                this.tabbarClick(this.tabbarData[newValue])
+                this.tabbarClick(this.tabbarData[newValue]) 
             }
         },
     },

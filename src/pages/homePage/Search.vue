@@ -24,13 +24,15 @@ export default {
 
     },
     mounted() {
-
+        vm.$off('navBarRightClick').$on('navBarRightClick',(navBarData)=>{
+            console.log('search',navBarData)
+        })
     },
     watch: {
 
     },
     methods: {
-
+        
     },
 };
 </script>
