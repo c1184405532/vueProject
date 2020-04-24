@@ -1,14 +1,17 @@
 <template>
     <div class="layout_page_box">
         <NavBar
-            title="首页"
+            :title="navBarTitle"
             :fixed="true"
             :leftArrow="false"
         />
             <div class="ignore_page_content">
                 <router-view/>
             </div>
-        <TabBar />
+        <TabBar
+            :tabbarData="tabbarData"
+            :tabbarClick="tabbarCallback"
+        />
     </div>
 </template>
 
@@ -26,6 +29,11 @@ export default {
     data() {
         return {
             transitionName:'',
+            tabbarData:[
+                {title:'首页',icon:'home-o',path:'layout/home'},
+                {title:'搜索',icon:'search',path:'layout/search'},
+            ],
+            navBarTitle:'',
         };
     },
     computed: {
@@ -41,7 +49,10 @@ export default {
         
     },
     methods: {
-
+        tabbarCallback(tabbarData){
+            console.log(tabbarData)
+            this.navBarTitle = tabbarData.title
+        },
     },
 };
 </script>
@@ -50,13 +61,17 @@ export default {
     .layout_page_box{
         height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column;
         //padding-bottom: 50PX;
         
     }
     .ignore_page_content{
         width: 100%;
-        height: calc(100% - 96px);
-        background: #ddd;
+        // height: 100%;
+        flex: 1;
+        //height: calc(100% - 96px);
+        
         overflow: auto;
     }
 </style>

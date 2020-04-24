@@ -3,6 +3,7 @@
         <NavBar
             title="详情页"
             :fixed="true"
+            :backClick="backCallback"
         />
         我是详情页
     </div>
@@ -35,7 +36,9 @@ export default {
 
     },
     methods: {
-
+        backCallback(route){
+            //console.log(route)
+        },
     },
 };
 </script>

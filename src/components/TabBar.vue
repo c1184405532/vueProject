@@ -4,8 +4,10 @@
             v-model="tabActive"
             class="tab_bar_box"
         >
-        <TabbarItem icon="home-o"  @click="gotoPage('layout/home')" >首页</TabbarItem>
-        <TabbarItem icon="search"  @click="gotoPage('layout/search')" >搜索</TabbarItem>
+        <TabbarItem :icon="value.icon" :key="value.title" v-for="(value) in tabbarData" @click="gotoPage(value.path)" >
+            {{value.title}}
+        </TabbarItem>
+        
             <!-- <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
             <van-tabbar-item icon="search">标签2</van-tabbar-item>
             <van-tabbar-item icon="freinds-o">标签3</van-tabbar-item>
@@ -23,10 +25,21 @@ export default {
         TabbarItem
     },
     props: {
-        title:{
-            type:String,
-            default:'导航栏'
-        }
+        tabbarData:{
+            type:Array,
+            default:function(){
+                //数据格式 Array（Object）
+                //{title:'首页',icon:'home-o',path:'layout/home'},
+                return []
+            }
+        },
+        //点击切换回调
+        tabbarClick:{
+            type:Function,
+            default:function(){
+
+            }
+        },
     },
     data() {
         return {
@@ -40,10 +53,16 @@ export default {
 
     },
     mounted() {
-
+        if(this.tabbarClick){
+            this.tabbarClick(this.tabbarData[this.tabActive])
+        }
     },
     watch: {
-
+        tabActive(newValue){
+            if(this.tabbarClick){
+                this.tabbarClick(this.tabbarData[newValue])
+            }
+        },
     },
     methods: {
         gotoPage(routerName){

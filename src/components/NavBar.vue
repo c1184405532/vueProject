@@ -36,8 +36,14 @@ export default {
         //是否固定顶部 并保留位置
         fixed:{
             type:Boolean,
-            default:false,
-        }
+            default:true,
+        },
+        backClick:{
+            type:Function,
+            default:function(){
+
+            }
+        },
     },
     data() {
         return {
@@ -51,7 +57,7 @@ export default {
 
     },
     mounted() {
-
+        
     },
     watch: {
 
@@ -62,9 +68,12 @@ export default {
         },
         leftClick(){
             if(this.leftArrow){
-                 this.$router.go(-1)
+                if(this.backClick){
+                    this.backClick(this.$router)
+                }
+                this.$router.go(-1)
             }
-           
+
         },
     },
 };
