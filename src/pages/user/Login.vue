@@ -52,15 +52,16 @@ export default {
                 userName:this.userAccount,
                 passWord:this.userPassword,
             }).then((res)=>{
-                console.log(res)
+                if(res.success){
+                    window.setToken(res.data.token)
+                    this.$router.push({
+                        name:'layout/home',
+                    })
+                }
+                //console.log(res)
             })
-            // this.$router.push({
-            //     name:'layout/home',
-            // })
-            console.log({
-                account:this.userAccount,
-                password:this.userPassword
-            })
+           
+            
         }
     }
 }

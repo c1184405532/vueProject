@@ -37,6 +37,7 @@ export default {
     },
     methods: {
        loginOut(){
+           window.clearToken();
            this.$router.push({
                 name:'user/login',
             })
