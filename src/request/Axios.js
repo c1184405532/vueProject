@@ -26,6 +26,18 @@ Axios.post = (url,data,requestToastConfig)=>{
     return axios.post(url,data)
    
 }
+Axios.put = (url,data,requestToastConfig)=>{
+	initAxiosConfig(requestToastConfig || {})
+	//console.log('axios',axios)
+	return axios.put(url,data)
+}
+Axios.delete = (url,data,requestToastConfig)=>{
+	initAxiosConfig(requestToastConfig || {})
+	//console.log('axios',axios)
+	return axios.delete(url,{
+		params:data
+	})
+}
 function initAxiosConfig(requestToastConfig){
 	//console.log('initAxiosConfig',requestToastConfig)
 	let toastConfig = {
