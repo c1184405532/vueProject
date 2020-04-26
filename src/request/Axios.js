@@ -35,7 +35,7 @@ Axios.delete = (url,data,requestToastConfig)=>{
 	initAxiosConfig(requestToastConfig || {})
 	//console.log('axios',axios)
 	return axios.delete(url,{
-		params:data
+		data:data
 	})
 }
 function initAxiosConfig(requestToastConfig){
