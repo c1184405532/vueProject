@@ -5,8 +5,9 @@
             :fixed="true"
             :backClick="backCallback"
         />
-        <ListComponents 
+        <!-- <ListComponents 
             :onRefresh="listRefresh" 
+            :listOnLoad="listOnLoad"
             ref="ListComponentsRef"
             class="ignore_list_box" 
         >
@@ -14,7 +15,21 @@
                 <p>姓名：{{value.name}}</p>
                 <p>年龄：{{value.age}}</p>
             </div>
-        </ListComponents>
+        </ListComponents> -->
+        <!-- <List
+                class=" list_box"  
+                v-model="listLoading"
+                :finished="listFinishedType"
+                :finished-text="finishedText"
+                
+                :offset="1000"
+                @load="listOnLoad"
+            >-->
+                <div class="list" v-for="(value,index) in listData" :key="index">
+                <p>姓名：{{value.name}}</p>
+                <p>年龄：{{value.age}}</p>
+            </div>
+          <!--</List> -->
     </div>
 </template>
 
@@ -22,10 +37,12 @@
 import NavBar from '@/components/NavBar.vue'
 import ListComponents from '@/components/ListComponents.vue'
 import Axios from '@/request/Axios.js'
+import { PullRefresh,List } from 'vant';
 export default {
     components: {
         NavBar,
-        ListComponents
+        ListComponents,
+        List
     },
     props: {
 
@@ -35,7 +52,10 @@ export default {
             listData:[
                 
             ],
-            page:1
+            page:1,
+            listLoading:false,
+            listFinishedType:false,
+            finishedText:'加载完成'
         };
     },
     computed: {
@@ -54,11 +74,14 @@ export default {
         backCallback(route){
             //console.log(route)
         },
-        getList(){
+        getList(getDataType){
             Axios.get('api/list',{
                 page:this.page,
             }).then((res)=>{
                 console.log('刷新成功',res)
+                if(getDataType && getDataType.clearRefresh){
+                    this.$refs.ListComponentsRef.refreshSuccess()
+                }
                 if(res.success){
                     let newArr = []
                     res.data.list.forEach(element => {
@@ -67,12 +90,25 @@ export default {
                     this.listData = newArr
                 }
                 
+                
             },error=>{
+                if(getDataType && getDataType.clearRefresh){
+                    this.$refs.ListComponentsRef.refreshSuccess()
+                }
                 
             })
         },
         listRefresh(){
-           this.$refs.ListComponentsRef.refreshSuccess()
+            this.page = 1;
+            this.listData = [];
+            this.getList({clearRefresh:true})
+
+        },
+        listOnLoad(){
+            console.log('滚动加载')
+            this.listLoading = false
+            // this.listFinishedType = false
+            //this.$refs.ListComponentsRef.listSuccess()
         },
     },
 };
@@ -82,12 +118,12 @@ export default {
     .detail_box{
         height: 100%;
         width: 100%;
-        .ignore_list_box{
-            
-            .list{
-                padding: 24px;
-                border-top: 1px solid #ddd;
-            }
+        .list{
+            padding: 42px;
+            border-top: 1px solid #ddd;
         }
+    }
+    .list_box{
+        
     }
 </style>

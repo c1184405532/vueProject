@@ -3,20 +3,34 @@
         <PullRefresh 
             class="list_components_box" 
             :success-text="successText"
-            v-model="isLoading" 
+            v-model="refreshLoading " 
             @refresh="onRefresh"
         >
-            <slot></slot>
+            <List
+                class="list_load_box"
+                v-model="listLoading"
+                :finished="listFinishedType"
+                :finished-text="finishedText"
+                :error-text="listErrorText"
+                :error.sync="listErrorType"
+                :immediate-check="immediateCheck"
+                :offset="1000"
+                @load="listOnLoad"
+            >
+                <slot></slot>
+            </List>
+            
         </PullRefresh>
     </div>
 </template>
 
 <script>
-import { PullRefresh } from 'vant';
+import { PullRefresh,List } from 'vant';
  
 export default {
     components: {
         PullRefresh,
+        List
     },
     props: {
         successText:{
@@ -28,11 +42,33 @@ export default {
             default:function(){
 
             }
+        },
+        finishedText:{
+            type:String,
+            default:'没有更多了'
+        },
+        listErrorText:{
+            type:String,
+            default:'请求失败，点击重新加载'
+        },
+        listOnLoad:{
+            type:Function,
+            default:function(){
+               
+            }
+        },
+        //是否在初始化时立即执行滚动位置检查
+        immediateCheck:{
+            type:Boolean,
+            default:false,
         }
     },
     data() {
         return {
-            isLoading:false
+            refreshLoading :false,
+            listLoading:false,
+            listFinishedType:false,
+            listErrorType:false,
         };
     },
     computed: {
@@ -50,8 +86,17 @@ export default {
     methods: {
        
         refreshSuccess(){
-            this.isLoading = false
+            this.refreshLoading  = false
         },
+        listSuccess(){
+            this.listLoading = false;
+        },
+        listError(type){
+            this.listErrorType = type;
+        },
+        listFinished(){
+            this.listFinished = true;
+        }
     },
 };
 </script>
@@ -59,5 +104,8 @@ export default {
 <style scoped lang="less">
     .list_components_box{
         min-height: 100px;
+    }
+    .list_load_box{
+        padding-bottom: 100px;
     }
 </style>
