@@ -9,6 +9,7 @@ const Home = ()=> import('@/pages/homePage/Home.vue');
 const Search = ()=> import('@/pages/homePage/Search.vue');
 const My = ()=> import('@/pages/homePage/My.vue');
 const Detail = ()=> import('@/pages/Detail.vue');
+const List = ()=> import('@/pages/List.vue');
 export default [
     {
         path:'/',

@@ -5,31 +5,23 @@
             :fixed="true"
             :backClick="backCallback"
         />
-        <!-- <ListComponents 
+        <ListComponents 
+            class="ignore_content_box"
             :onRefresh="listRefresh" 
             :listOnLoad="listOnLoad"
+            :refreshDisabled="false"
+            :listDisabled="false"
+            :finishedText="finishedText"
+            :successText="successText"
             ref="ListComponentsRef"
-            class="ignore_list_box" 
+            
         >
             <div class="list" v-for="(value,index) in listData" :key="index">
                 <p>姓名：{{value.name}}</p>
                 <p>年龄：{{value.age}}</p>
             </div>
-        </ListComponents> -->
-        <!-- <List
-                class=" list_box"  
-                v-model="listLoading"
-                :finished="listFinishedType"
-                :finished-text="finishedText"
-                
-                :offset="1000"
-                @load="listOnLoad"
-            >-->
-                <div class="list" v-for="(value,index) in listData" :key="index">
-                <p>姓名：{{value.name}}</p>
-                <p>年龄：{{value.age}}</p>
-            </div>
-          <!--</List> -->
+        </ListComponents>
+       
     </div>
 </template>
 
@@ -53,9 +45,9 @@ export default {
                 
             ],
             page:1,
-            listLoading:false,
-            listFinishedType:false,
-            finishedText:'加载完成'
+            listTotal:0,
+            finishedText:'',
+            successText:'刷新成功'
         };
     },
     computed: {
@@ -77,38 +69,66 @@ export default {
         getList(getDataType){
             Axios.get('api/list',{
                 page:this.page,
+            },{
+                beforeRequestToastType:getDataType ? getDataType.beforeRequestToastType : true
             }).then((res)=>{
-                console.log('刷新成功',res)
+                //console.log('刷新成功',res)
+                
+                if(res.success){
+                    
+                    this.listData = [...this.listData,...res.data.list]
+                    this.listTotal = res.data.total;
+                    if(this.listData.length >= this.listTotal ){
+                        this.finishedText = '没有更多了';
+                        this.$refs.ListComponentsRef.listFinished(true)
+                    }else{
+                        this.$refs.ListComponentsRef.listFinished(false)
+                    }
+                    if(this.listData.length === 0){
+                        this.finishedText = '暂无数据';
+                    }
+                }
                 if(getDataType && getDataType.clearRefresh){
+                    if(this.listData.length === 0){
+                        this.successText = '';
+                    }else{
+                        this.successText = '刷新成功';
+                    }
                     this.$refs.ListComponentsRef.refreshSuccess()
                 }
-                if(res.success){
-                    let newArr = []
-                    res.data.list.forEach(element => {
-                        newArr.push(element)
-                    });
-                    this.listData = newArr
+                if(getDataType && getDataType.clearListLoad){
+                    this.$refs.ListComponentsRef.listSuccess()
                 }
-                
                 
             },error=>{
                 if(getDataType && getDataType.clearRefresh){
                     this.$refs.ListComponentsRef.refreshSuccess()
                 }
-                
+                if(getDataType && getDataType.clearListLoad){
+                    this.$refs.ListComponentsRef.listSuccess()
+                }
             })
         },
         listRefresh(){
             this.page = 1;
             this.listData = [];
+            this.finishedText = '';
             this.getList({clearRefresh:true})
 
         },
         listOnLoad(){
-            console.log('滚动加载')
-            this.listLoading = false
-            // this.listFinishedType = false
-            //this.$refs.ListComponentsRef.listSuccess()
+            console.log('滚动到的');            
+            // console.log('this.listData.length',this.listData.length)
+            // console.log('this.listTotal',this.listTotal)
+            if(this.listData.length < this.listTotal){
+                this.page += 1;
+                this.getList({
+                    clearListLoad:true,
+                    beforeRequestToastType:false,
+                })
+            }
+            
+            
         },
     },
 };
@@ -118,12 +138,15 @@ export default {
     .detail_box{
         height: 100%;
         width: 100%;
+        // overflow: auto;
         .list{
             padding: 42px;
             border-top: 1px solid #ddd;
         }
     }
     .list_box{
-        
-    }
+        height: 1000px;
+        width: 100%;
+        overflow: auto  ;
+    }   
 </style>
