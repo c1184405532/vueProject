@@ -3,7 +3,9 @@
         <div class="">首页</div>
         <Button type="primary" @click="requestMethods('put')">put请求</Button>
         <Button type="primary"  @click="requestMethods('delete')">delete请求</Button>      
-        <Button @click="gotoPage()">查看详情</Button>
+        <div class="layout_padding">
+            <Button @click="gotoPage('home/listReveal/list')">二次封装列表组件展示</Button>
+        </div>
     </div>
 </template>
 
@@ -37,9 +39,9 @@ export default {
 
     },
     methods: {
-        gotoPage(){
+        gotoPage(routerName){
             this.$router.push({
-                name:'home/detail',
+                name:routerName,
             })
         },
         requestMethods(type){
