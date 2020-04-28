@@ -31,6 +31,7 @@ import ListComponents from '@/components/ListComponents.vue'
 import Axios from '@/request/Axios.js'
 
 export default {
+    name:'homelistReveallist',
     components: {
         NavBar,
         ListComponents,
@@ -60,22 +61,39 @@ export default {
     mounted() {
         this.getList()
     },
+    
     watch: {
 
     },
+    beforeRouteLeave(to,from,next){
+        //此注释配置用于v-if keep-alive 组件配置 用此方式就打开注释
+        // console.log('to',to)
+        // console.log('form',from)
+        // to.meta.keepAlive = true; 
+        // if(to.name !== 'home/listReveal/detail'){
+        //     to.meta.keepAlive = false; 
+        // }
+        this.$nextTick(()=>{
+            next()
+        })
+        
+    },
     methods: {
         gotoDetail(routerName,data){
+            window.vm.$emit('setKeepAliveData','homelistReveallist')
             this.$router.push({
                 name:routerName,
+                query:data
             })
         },
         backCallback(route){
+            window.vm.$emit('clearKeepAliveData','homelistReveallist')
             //console.log(route)
         },
-        //本人所有接口api都是用的自己封装的node接口
+        //本模板所有接口api都是用的自己封装的node接口
         //地址 https://github.com/c1184405532/myNodeRequest.git
         //有自己的服务器数据 就在http-default.js中设置你的服务器端口
-        //没有就下载我的node.js服务器 本地运行 然后配置端口请求就行
+        //没有就下载我的node.js文件 本地运行 然后配置端口请求就行
         getList(getDataType){
             Axios.get('api/list',{
                 //当前页数

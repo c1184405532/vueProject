@@ -6,13 +6,13 @@
             :backClick="backCallback"
         />
        
-       
+       <p>{{parentData.name}}</p>
+       <p>{{parentData.age}}</p>
     </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-
 import Axios from '@/request/Axios.js'
 
 export default {
@@ -25,15 +25,15 @@ export default {
     },
     data() {
         return {
-            
-            
+            parentData:{}
         };
     },
     computed: {
 
     },
     created() {
-
+        //console.log('路由参数',this.$route)
+        this.parentData = this.$route.query
     },
     mounted() {
         
