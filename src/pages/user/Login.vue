@@ -34,7 +34,7 @@ export default {
 	computed: {},
 	created() {},
 	mounted() {
-      
+        //this.$router.go(-1)
     },
 	watch: {},
 	methods: {
@@ -54,7 +54,8 @@ export default {
             }).then((res)=>{
                 if(res.success){
                     window.setToken(res.data.token)
-                    this.$router.push({
+                    window.setLocalStorage('routerIsBack',true)
+                    this.$router.replace({
                         name:'layout/home',
                     })
                 }

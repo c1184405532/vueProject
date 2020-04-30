@@ -78,8 +78,14 @@ export default {
         })
         
     },
+    activated(){
+       this.$refs.ListComponentsRef.$el.scrollTop = window.getLocalStorage('homelistReveallistScrollTop')
+    },
+    
     methods: {
         gotoDetail(routerName,data){
+            
+            window.setLocalStorage('homelistReveallistScrollTop',this.$refs.ListComponentsRef.$el.scrollTop)
             window.vm.$emit('setKeepAliveData','homelistReveallist')
             this.$router.push({
                 name:routerName,
@@ -87,6 +93,7 @@ export default {
             })
         },
         backCallback(route){
+            window.removeLocalStorage('homelistReveallistScrollTop')
             window.vm.$emit('clearKeepAliveData','homelistReveallist')
             //console.log(route)
         },
