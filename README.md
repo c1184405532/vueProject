@@ -61,7 +61,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
     pages/homePage/Search.vue app搜索页。
 
-    pages/homePage/My.vue app我的页面 （以上配置页面需显示要在路由下配置跳转路由，和在Layout.vue配置tabbarData的数据，建议最多不超过五个）
+    pages/homePage/My.vue app我的页面 （以上配置页面需显示要在路由下配置跳转路由，可在Layout.vue配置tabbarData的数据，建议最多不超过五个）
 
     globaleStyle/globale.less 全局css配置
     
@@ -69,6 +69,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
     globaleConfig/userMessage.js  一些全局公共函数 （请进入查看）
 
+    components/ListComponents.vue 列表组件 包含 滚动到底加载更多 下拉刷新 
+
+    components/NavBar.vue 导航栏组件 可自定义标题 图标
+
+    components/TabBar.vue 底部导航组件 可自定义导航名 图标
 
 
 

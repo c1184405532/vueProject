@@ -27,7 +27,8 @@ const Home = ()=> import('@/pages/homePage/Home.vue');
 const Search = ()=> import('@/pages/homePage/Search.vue');
 const My = ()=> import('@/pages/homePage/My.vue');
 const List = ()=> import('@/pages/listReveal/List.vue');
-const Detail = ()=> import('@/pages/listReveal/Detail.vue');
+const ListDetail = ()=> import('@/pages/listReveal/Detail.vue');
+const SearchDetail = ()=> import('@/pages/search/Detail.vue');
 export default [
     {
         path:'/',
@@ -73,10 +74,17 @@ export default [
         name: 'home/listReveal/list',
         component: List
     },  
+    
     {
         meta: { index:4},
         path: '/home/listReveal/detail',//以“/”开头的嵌套路径会被当作根路径，所以子路由上不用加“/”;在生成路由时，主路由上的path会被自动添加到子路由之前，所以子路由上的path不用在重新声明主路由上的path了。
         name: 'home/listReveal/detail',
-        component: Detail
+        component: ListDetail
+    }, 
+    {
+        meta: { index:3},
+        path: '/home/search/detail',//以“/”开头的嵌套路径会被当作根路径，所以子路由上不用加“/”;在生成路由时，主路由上的path会被自动添加到子路由之前，所以子路由上的path不用在重新声明主路由上的path了。
+        name: 'home/search/detail',
+        component: SearchDetail
     }, 
 ]

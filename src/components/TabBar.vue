@@ -4,32 +4,47 @@
             v-model="tabActive"
             class="tab_bar_box"
         >
-        <TabbarItem :icon="value.icon" :key="value.title" v-for="(value) in tabbarData" @click="gotoPage(value.path)" >
-            {{value.title}}
-        </TabbarItem>
-        
-            <!-- <van-tabbar-item icon="home-o">标签1</van-tabbar-item>
-            <van-tabbar-item icon="search">标签2</van-tabbar-item>
-            <van-tabbar-item icon="freinds-o">标签3</van-tabbar-item>
-            <van-tabbar-item icon="setting-o">标签4</van-tabbar-item> -->
-
+            <TabbarItem  :key="value.title" v-for="(value,index) in tabbarData" @click="gotoPage(value.routerName)" >
+                <span :style="{color:index === tabActive ?value.activeColor:value.color}"> {{value.tabbarTitle}}</span>
+                <template #icon="props">
+                    <Icon v-if="!value.tabImg" :name="value.icon" :color="props.active ? value.activeColor : value.color " />
+                    <img v-if="value.tabImg"  :src="imgSrc(props.active,value)" />
+                </template>
+            </TabbarItem>
+          
+            
         </Tabbar>
     </div>
 </template>
 
 <script>
-import {Tabbar,TabbarItem } from 'vant';
+import {Tabbar,TabbarItem ,Icon } from 'vant';
 export default {
     components: {
         Tabbar,
-        TabbarItem
+        TabbarItem,
+        Icon
     },
     props: {
         tabbarData:{
             type:Array,
             default:function(){
                 //数据格式 Array（Object）
-                //{title:'首页',icon:'home-o',path:'layout/home'},
+                //{tabbarTitle:'首页',icon:'home-o',routerName:'layout/home'},
+                /*
+                    tabbarTitle: String, 底部列文字 
+                    icon: String 图标名, (可传vant图标名 图片链接 或者require(本地图片路径)) 图片缺点：不会随选中状态变更色彩
+                    color: String'#646566',未选中字体颜色 
+                    activeColor: String "#f00",选中字体颜色
+                    tabImg:String require('@/assets/logo.png') || http图片链接, 默认图标地址 当设置了此配置项时 icon字段 无效
+                    tabActiveImg: String require('@/assets/home.jpg') || http图片链接,选中图片地址 当设置了此配置项时 icon字段 无效
+                    navTitle: String "首页", 头部导航栏文字
+                    navRightIcon: String 'home-o' || require('@/assets/home.jpg') || http图片链接 ,头部导航栏右侧图标
+                    navRightText: String '右侧按钮',头部右侧导航文字 当navRightIcon存在时 此配置无效
+                    navRightColor: String '#f00', 头部导航栏右侧图标或文字颜色
+                    routerName: String 'layout/home',要跳转的路由名 （是router.js中的name字段不是path字段请注意）
+                    navBarType: Boolean true, 是否显示头部导航栏
+                */
                 return []
             }
         },
@@ -44,6 +59,7 @@ export default {
     data() {
         return {
             tabActive:0,
+            tabbarDataFilter:[],
         };
     },
     computed: {
@@ -82,9 +98,16 @@ export default {
     },
     methods: {
         gotoPage(routerName){
-            this.$router.push({
+            this.$router.replace({
                 name:routerName
             })
+        },
+        imgSrc(type,value){
+            if(type && value.tabActiveImg){
+                return value.tabActiveImg
+            }else{
+                return value.tabImg
+            }
         },
     },
 };

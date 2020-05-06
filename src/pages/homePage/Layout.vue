@@ -5,6 +5,9 @@
             :fixed="true"
             :leftArrow="false"
             :navRightIcon="navRightIcon"
+            :navRightText="navRightText"
+            :navRightColor="navRightColor"
+            :isHomeLayout="true"
             v-show="isShowNavBar"
             
         />
@@ -33,12 +36,19 @@ export default {
         return {
             transitionName:'',
             tabbarData:[
-                {title:'首页',icon:'home-o',navRightIcon:'search',path:'layout/home',navBarType:true},
-                {title:'搜索',icon:'search',navRightIcon:'home-o',path:'layout/search',navBarType:true},
-                {title:'我的',icon:'contact',navRightIcon:'search',path:'layout/my',navBarType:true},
+                //详细配置请查看TabBar组件配置说明
+                //icon tabbar图标 (可传vant图标名 图片链接 或者require(本地图片路径)) 图片缺点：不会随选中状态变更色彩
+                //navTitle导航栏标题 如果没有则默认设置为tabbarTitle 
+                //routerName 点击底部跳转路由name （不是path）
+                //navBarType 是否显示头部导航栏
+                {tabbarTitle:'首页',icon:'home-o',color:'#646566',activeColor:"#f00",tabImg:require('@/assets/logo.png'),tabActiveImg:require('@/assets/home.jpg'),navTitle:"首页",navRightIcon:require('@/assets/home.jpg'),navRightText:'右侧按钮',navRightColor:'#f00',routerName:'layout/home',navBarType:true},
+                {tabbarTitle:'搜索',icon:'search',color:'#333',navTitle:"",navRightText:'右侧按钮',navRightColor:'#f00',routerName:'layout/search',navBarType:true},
+                {tabbarTitle:'我的',icon:'contact',navTitle:"个人中心",navRightIcon:'',routerName:'layout/my',navBarType:true},
             ],
             navBarTitle:'',
             navRightIcon:'',
+            navRightText:'',
+            navRightColor:'',
             isShowNavBar:true,
         };
     },
@@ -55,11 +65,14 @@ export default {
         
     },
     methods: {
+        //点击底部跳转的回调
         tabbarCallback(tabbarData){
             console.log(tabbarData)
-            this.navBarTitle = tabbarData.title
-            this.navRightIcon = tabbarData.navRightIcon
-            this.isShowNavBar = tabbarData.navBarType
+            this.isShowNavBar = tabbarData.navBarType;
+            this.navBarTitle = tabbarData.navTitle ? tabbarData.navTitle : tabbarData.tabbarTitle;
+            this.navRightIcon = tabbarData.navRightIcon;
+            this.navRightText = tabbarData.navRightText;
+            this.navRightColor = tabbarData.navRightColor;
         },
     },
 };

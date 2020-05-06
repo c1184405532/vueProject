@@ -1,8 +1,6 @@
 <template>
     <div>
         <NavBar 
-            :title="title" 
-            rightText="按钮"
             :left-arrow="leftArrow"
             :placeholder="true"
             :fixed="fixed"
@@ -12,7 +10,8 @@
         >
             <div slot="title">{{title}}</div>
             <div slot="right" class="nav_right_box">
-                <Icon :name="navRightIcon" size="18" />
+                <Icon :name="navRightIcon" v-if="navRightIcon" size="18" :style="{color:navRightColor}"/>
+                <span v-if="!navRightIcon" :style="{color:navRightColor}">{{navRightText}}</span>
             </div>
         </NavBar>
     </div>
@@ -53,6 +52,25 @@ export default {
             type:String,
             default:''
         },
+        //右侧文字
+        navRightText:{
+            type:String,
+            default:''
+        },
+        //右侧文字或图标颜色
+        navRightColor:{
+            type:String,
+            default:''
+        },    
+        //右侧点击回调
+        navRightClick:{
+            type:Function,
+        },
+        //是否是在首页调用的NavBar组件
+        isHomeLayout:{
+            type:Boolean,
+            default:false,
+        }
     },
     data() {
         return {
@@ -73,10 +91,21 @@ export default {
     },
     methods: {
         rightClick(){
-            vm.$emit('navBarRightClick',{
-                title:this.title,
-                navRightIcon:this.navRightIcon
-            })
+            //如果是首页那么调用监听事件
+            if(this.isHomeLayout && (this.navRightText || this.navRightIcon)){
+                vm.$emit('navBarRightClick',{
+                    title:this.title,
+                    navRightIcon:this.navRightIcon
+                })
+            }else{
+                if(this.navRightClick){
+                    this.navRightClick({
+                        title:this.title,
+                        navRightIcon:this.navRightIcon
+                    })
+                }
+            }
+            
             //console.log('点击')
         },
         leftClick(){

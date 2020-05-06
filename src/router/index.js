@@ -36,7 +36,7 @@ export default new VueRouter({
                 })
             } 
         // console.log('to',to)
-        console.log('to',to)
+        //console.log('to',to)
         // console.log('savedPosition',savedPosition)
     },
 })
