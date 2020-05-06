@@ -47,13 +47,19 @@ export default {
         requestMethods(type){
             if(type === 'put'){
                 let putData = [{name:'chenyuting',age:23},{name:'chenyuting',age:23}]
-                Axios.put('api/add/list',{list:putData}).then((res)=>{
+                Axios.put('api/add/list',
+                    {
+                        data:{list:putData}
+                    }
+                ).then((res)=>{
                     console.log('putres',res)
                 })
             }
             if(type === 'delete'){
                 let deleteData = ['1','2']
-                Axios.delete('api/delete/list',{ids:deleteData}).then((res)=>{
+                Axios.delete('api/delete/list',{
+                    data:{ids:deleteData}
+                }).then((res)=>{
                     console.log('deleteres',res)
                 })
             }

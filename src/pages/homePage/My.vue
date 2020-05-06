@@ -37,7 +37,7 @@ export default {
     },
     methods: {
        loginOut(){
-            window.clearToken();
+            window.removeToken();
             window.removeLocalStorage('routerIsBack')
             this.$router.replace({
                 name:'user/login',

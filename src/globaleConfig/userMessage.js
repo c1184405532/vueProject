@@ -4,7 +4,7 @@ window.getToken = function(){
 window.setToken = function(token){
     localStorage.setItem('userToken',token)
 }
-window.clearToken = function(){
+window.removeToken = function(){
     localStorage.removeItem('userToken')
 }
 window.getLocalStorage = function(key){

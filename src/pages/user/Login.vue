@@ -34,10 +34,27 @@ export default {
 	computed: {},
 	created() {},
 	mounted() {
+        //请求失败重连测试案例
+        //this.getData()
         //this.$router.go(-1)
     },
 	watch: {},
 	methods: {
+        getData(){
+            Axions.get('api/randomRequest',{
+                data:{name:'cyt'},
+                custom:{
+                    retryDelay:1000,
+                    shouldRetry:true,
+                    message:'请求失败，重连中...'
+                }
+            }).then((res)=>{
+               
+                console.log('随机数请求',res)
+            },error=>{
+                console.log('随机数错误',error)
+            })
+        },
         handSubmit(){
             if(this.userAccount === ''){
                 this.$toast('请输入用户账号')
@@ -49,8 +66,14 @@ export default {
             }
             localStorage.setItem('tabBarActive',0)
             Axions.post('api/login',{
-                userName:this.userAccount,
-                passWord:this.userPassword,
+                data:{
+                    userName:this.userAccount,
+                    passWord:this.userPassword,
+                },
+                requestToastConfig:{
+                    message:'正在登陆...'
+                },
+                
             }).then((res)=>{
                 if(res.success){
                     window.setToken(res.data.token)

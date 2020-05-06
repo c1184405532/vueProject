@@ -104,10 +104,14 @@ export default {
         getList(getDataType){
             Axios.get('api/list',{
                 //当前页数
-                page:this.page,
-            },{
+                data:{
+                    page:this.page,
+                },
                 //此配置详见Axios.js配置
-                beforeRequestToastType:getDataType ? getDataType.beforeRequestToastType : true
+                requestToastConfig:{
+                    
+                    beforeRequestToastType:getDataType ? getDataType.beforeRequestToastType : true
+                }
             }).then((res)=>{
                 //console.log('刷新成功',res)  
                 if(res.success){

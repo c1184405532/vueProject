@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-// import {baseRouterPath} from './globaleConfig/routerConfig.js'
 import './globaleConfig/routerConfig.js'
 import './globaleConfig/userMessage.js'
 import router from './router/index'
