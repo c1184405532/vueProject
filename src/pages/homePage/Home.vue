@@ -6,6 +6,7 @@
         <div class="layout_padding">
             <Button @click="gotoPage('home/listReveal/list')">二次封装列表组件展示</Button>
         </div>
+        
     </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
     },
     data() {
         return {
-           
+          
         };
     },
     computed: {
@@ -70,7 +71,7 @@ export default {
 
 <style scoped lang="less">
     .home_page{
-        height: 600PX;
+        height: 600px;
         background: #ddd;
         width: 100%;
     }

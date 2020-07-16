@@ -125,6 +125,7 @@ export default {
     .nav_bar_box{
         //height: 100px;
         width: 100%;
+        font-size: 20px;
     }
 
     .nav_right_box{

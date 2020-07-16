@@ -9,13 +9,10 @@ import './globaleStyle/globale.less'
 
 import Vconsole from 'vconsole'
 
-
 import Vant from 'vant';
 import 'vant/lib/index.css';
-
 // let newvConsole = new Vconsole()
 // Vue.use(newvConsole)
-
 Vue.use(Vant);
 
 

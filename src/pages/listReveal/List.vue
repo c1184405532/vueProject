@@ -197,8 +197,11 @@ export default {
     },
 };
 </script>
-
+<style lang="less" scoped>
+@import '~@globaleStyle/globale.less';
+</style>
 <style scoped lang="less">
+    
     .list_component_box{
         height: 100%;
         width: 100%;
