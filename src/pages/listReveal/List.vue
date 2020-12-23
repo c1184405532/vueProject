@@ -208,9 +208,5 @@ export default {
             border-top: 1px solid #ddd;
         }
     }
-    .list_box{
-        height: 1000px;
-        width: 100%;
-        overflow: auto  ;
-    }   
+     
 </style>
